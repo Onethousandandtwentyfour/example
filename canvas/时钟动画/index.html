@@ -1,1 +1,100 @@
 
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>canvas时钟</title>
+	</head>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
+		.box {
+			position: fixed;
+			left: 0;
+			top: 0;
+			width: 100vw;
+			height: 100vh;
+			background-color: #666666;
+
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+	</style>
+	<body>
+		<div class="box">
+			<canvas id="canvas" width="750" height="750">您的浏览器不支持canvas,请升级至最新版的浏览器查看本页面</canvas>
+		</div>
+		<script>
+			var canvas = document.querySelector('#canvas');
+			var ctx = canvas.getContext('2d');
+			draw();
+
+			function draw() {
+				requestAnimationFrame(function ani(){
+					//表盘
+					draw_clock_dial(ctx);
+					//指针
+					draw_pointer(ctx);
+					requestAnimationFrame(ani);
+				});
+			}
+			function draw_clock_dial(ctx){
+				ctx.clearRect(0,0,750,750);
+				ctx.save();
+				
+				ctx.translate(375,375);
+				ctx.beginPath();
+				ctx.strokeStyle='deepskyblue';
+				ctx.arc(0,0,300,0,2*Math.PI,false);
+				ctx.stroke();
+				ctx.closePath();
+				
+				for(var i=1;i<=60;i++){
+					ctx.save();
+					ctx.rotate(Math.PI/30*i);
+					ctx.beginPath();
+					let point = i%5===0?240:250;
+					ctx.moveTo(300,0);
+					ctx.lineTo(point,0);
+					ctx.lineWidth=i%5===0?5:3;
+					ctx.strokeStyle=i%5===0?'orange':'white';
+					ctx.stroke();
+					ctx.closePath();
+					ctx.restore();
+				}
+				ctx.restore();
+			}
+			function draw_pointer(ctx){
+				let time = new Date();
+				let s = time.getSeconds(),
+					m = time.getMinutes(),
+					h = time.getHours();
+				
+				let s_rotate = Math.PI/30*s,
+					m_rotate = Math.PI/30*m+s_rotate/60,
+					h_rotate = Math.PI/6*h+m_rotate/12;
+				draw_each_pointer(h_rotate,145,-5,'cyan',ctx);
+				draw_each_pointer(m_rotate,205,-10,'orange',ctx);
+				draw_each_pointer(s_rotate,255,-15,'red',ctx);
+			}
+			function draw_each_pointer(rotateNum,len1,len2,color,ctx){
+				ctx.save();
+				ctx.translate(375,375);
+				ctx.beginPath();
+				ctx.rotate(-Math.PI/2+rotateNum);
+				ctx.moveTo(len2,0);
+				ctx.lineTo(len1,0);
+				ctx.lineWidth=10;
+				ctx.strokeStyle=color;
+				ctx.lineCap='round';
+				ctx.stroke();
+				ctx.closePath();
+				ctx.restore();
+			}
+		</script>
+	</body>
+</html>
