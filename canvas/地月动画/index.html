@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>canvas动画</title>
+	</head>
+	<style>
+		*{
+			margin:0;
+			padding: 0;
+		}
+		.box{
+			position: fixed;
+			left:0;
+			top:0;
+			width:100vw;
+			height:100vh;
+			background-color: #666666;
+			
+			display:flex;
+			justify-content: center;
+			align-items:center;
+		}
+	</style>
+	<body>
+		<div class="box">
+			<canvas  id="canvas" width="750" height="750"></canvas>
+		</div>
+		<script>
+			var canvas = document.querySelector('#canvas');
+			var ctx = canvas.getContext('2d');
+			draw();
+			function draw(){
+				ctx.clearRect(0,0,750,750);
+				ctx.save();
+				//sun
+				ctx.beginPath();
+				ctx.fillStyle='yellow';
+				ctx.arc(375,375,100,0,2*Math.PI,false);
+				ctx.fill();
+				ctx.font = "30px sans-serif";
+				ctx.textAlign="center";
+				ctx.strokeText('太阳',375,375);
+				//earth-guidao
+				ctx.beginPath();
+				ctx.strokeStyle='cyan';
+				ctx.translate(375,375);
+				ctx.arc(0,0,200,0,2*Math.PI,false);
+				ctx.stroke();
+				//earth
+				ctx.beginPath();
+				let time = new Date();
+				ctx.rotate(2 * Math.PI / 60 * time.getSeconds() + 2 * Math.PI / 60000 * time.getMilliseconds());
+				ctx.translate(200,0);
+				ctx.arc(0,0,30,0,2*Math.PI,false);
+				ctx.fillStyle='skyblue';
+				ctx.fill();
+				ctx.fillStyle="orange";
+				ctx.font="10px sans-serif";
+				ctx.textAlign="center";
+				ctx.fillText("地球",0,0);
+				//moon-guidao
+				ctx.beginPath();
+				ctx.strokeStyle='white';
+				ctx.arc(0,0,50,0,2*Math.PI,false);
+				ctx.stroke();
+				//moon
+				ctx.beginPath();
+				ctx.fillStyle='wheat';
+				ctx.rotate(2 * Math.PI / 6 * time.getSeconds() + 2 * Math.PI / 6000 * time.getMilliseconds());
+				ctx.translate(50,0);
+				ctx.arc(0,0,10,0,2*Math.PI,false);
+				ctx.fill();
+				ctx.fillStyle="orange";
+				ctx.font="5px sans-serif";
+				ctx.textAlign="center";
+				ctx.fillText("月球",0,0);
+				
+				ctx.restore();
+				
+				requestAnimationFrame(draw);
+			}
+			
+		</script>
+	</body>
+</html>
