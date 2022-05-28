@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Three.js学习-01</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        position: relative;
+    }
+
+    html,
+    body,
+    .page {
+        width: 100%;
+        height: 100%;
+    }
+
+    .page {
+        background: linear-gradient(-45deg, deepskyblue, deeppink);
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .content {
+        width: 375px;
+        height: 375px;
+        background-color: white;
+    }
+</style>
+
+<body>
+    <div class="page">
+        <div class="content"></div>
+    </div>
+
+</body>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js" ></script>
+<script>
+    const outer = document.querySelector('.content');
+    //渲染器
+    //设置渲染容器
+    const renderer = new THREE.WebGLRenderer();
+    renderer.setSize(375, 375, true);
+    renderer.setClearColor(0xb9d3ff, 1); //设置背景颜色
+    outer.appendChild(renderer.domElement);
+    //场景
+    const scene = new THREE.Scene();
+    //三维坐标系
+    var axesHelper = new THREE.AxesHelper(375 / 2);
+    scene.add(axesHelper);
+    //立方体
+    const geometry = new THREE.BoxGeometry(40, 40, 40),
+        material = new THREE.MeshPhongMaterial({
+            color: 'red'
+        }),
+        material2 = new THREE.MeshPhongMaterial({
+            color: 'yellow'
+        });
+    const cube = new THREE.Mesh(geometry, material);
+    cube.position.set(-40, 0, 0);
+    scene.add(cube);
+    const cube2 = new THREE.Mesh(geometry, material2);
+    cube2.position.set(40, 0, 0);
+    scene.add(cube2);
+    //灯光
+    const light = new THREE.DirectionalLight('white', 1);
+    light.position.set(0, 50, -50);
+    scene.add(light);
+    //相机
+    const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 200);
+    camera.position.set(0, 0, 200);
+    camera.lookAt(scene.position);
+
+    function render(time) {
+        // time *= 0.001 % 360;
+        // cube.rotation.x = time;
+        renderer.render(scene, camera);
+        requestAnimationFrame(render);
+    }
+    requestAnimationFrame(render);
+
+
+    outer.onmousewheel = function (e) {
+        e = e || window.event;
+        if (e.wheelDelta) { //判断浏览器IE，谷歌滑轮事件
+            if (e.wheelDelta > 0) { //当滑轮向上滚动时
+                camera.position.z += 1;
+            }
+            if (e.wheelDelta < 0) { //当滑轮向下滚动时
+                camera.position.z -= 1;
+            }
+        } else if (e.detail) { //Firefox滑轮事件
+            if (e.detail > 0) { //当滑轮向上滚动时
+                camera.position.z += 1;
+            }
+            if (e.detail < 0) { //当滑轮向下滚动时
+                camera.position.z -= 1;
+            }
+        }
+    };
+
+    let isDown = false;
+    startPointer = {
+        x: 0,
+        y: 0,
+    }
+    outer.onmousedown = outer.ontouchstart = function (e) {
+        if (!e.x) {
+            e = {
+                x: e.targetTouches[0].clientX,
+                y: e.targetTouches[0].clientY,
+            }
+        }
+        isDown = true;
+        startPointer.x = e.x;
+        startPointer.y = e.y;
+    }
+    outer.onmousemove = outer.ontouchmove = function (e) {
+        if (isDown) {
+            if (!e.x) {
+                e = {
+                    x: e.targetTouches[0].clientX,
+                    y: e.targetTouches[0].clientY,
+                }
+            }
+            scene.rotation.y += (e.x - startPointer.x) * 0.01;
+            scene.rotation.x += (e.y - startPointer.y) * 0.01;
+            startPointer.x = e.x;
+            startPointer.y = e.y;
+        }
+    }
+    outer.onmouseup = outer.ontouchend = function (e) {
+        isDown = false;
+    }
+</script>
+
+</html>
