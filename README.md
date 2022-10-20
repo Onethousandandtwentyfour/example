@@ -7,7 +7,7 @@
 
 2.[时钟动画](https://onethousandandtwentyfour.github.io/example/canvas/%e6%97%b6%e9%92%9f%e5%8a%a8%e7%94%bb/)
 
-3.[迷宫寻路](https://onethousandandtwentyfour.github.io/example/bfs_test/index.html)
+3.[迷宫寻路](https://onethousandandtwentyfour.github.io/example/bfs_test/)
 
 ### 其他
 [vue template test](https://onethousandandtwentyfour.github.io/example/dist/index.html)
