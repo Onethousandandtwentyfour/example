@@ -166,10 +166,12 @@ export default class Maze {
     const current = this.current;
     let x = Math.min(current[0] + target[1], this.row - 1),
       y = Math.min(current[1] + target[0], this.col - 1);
-    if (gridStatusEnum.point == this.gridStatus[x][y]) {
-      console.log("");
+    if (gridStatusEnum.point == this.gridStatus[x][y] && x != 0 && y != 0) {
       alert("you win");
-    } else if (gridStatusEnum.available == this.gridStatus[x][y]) {
+    } else if (
+      gridStatusEnum.available == this.gridStatus[x][y] ||
+      (x == 0 && y == 0)
+    ) {
       this.domNodes[current[0]][current[1]].classList.remove("start");
       this.domNodes[x][y].classList.add("start");
       this.current = [x, y];
