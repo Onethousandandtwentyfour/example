@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="target-densitydpi=device-dpi,width=640,user-scalable=no"
+    />
+    <title>广度优先算法（bfs）-迷宫寻路</title>
+    <link type="text/css" rel="stylesheet" href="./css/reset.css" />
+    <link type="text/css" rel="stylesheet" href="./css/index.css" />
+    <link type="text/css" rel="stylesheet" href="./css/controller.css" />
+  </head>
+  <body>
+    <div class="app">
+      <h2>迷宫寻路</h2>
+      <div class="form">
+        <div class="row">
+          <span>行数</span>
+          <div class="number-input">
+            <button class="icon-btn" data-key="row" data-val="-1">-</button>
+            <input
+              class="input input-row"
+              min="10"
+              max="100"
+              value="10"
+              placeholder="行数"
+              type="number"
+            />
+            <button class="icon-btn" data-key="row" data-val="1">+</button>
+          </div>
+        </div>
+        <div class="row">
+          <span>列数</span>
+          <div class="number-input">
+            <button class="icon-btn" data-key="col" data-val="-1">-</button>
+            <input
+              class="input input-col"
+              min="10"
+              max="100"
+              value="10"
+              placeholder="列数"
+              type="number"
+            />
+            <button class="icon-btn" data-key="col" data-val="1">+</button>
+          </div>
+        </div>
+        <div class="btns">
+          <button class="btn init-btn">创建地图格子</button>
+          <button class="btn reset-btn">重置</button>
+          <button class="btn search-btn">金手指</button>
+          <button class="btn random-btn">随机障碍</button>
+        </div>
+      </div>
+      <div class="table"></div>
+    </div>
+    <div class="controller">
+      <button class="btn up">上</button>
+      <button class="btn down">下</button>
+      <button class="btn left">左</button>
+      <button class="btn right">右</button>
+    </div>
+    <script type="module" src="./js/index.js"></script>
+  </body>
+</html>

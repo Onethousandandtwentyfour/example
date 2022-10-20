@@ -1,0 +1,95 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.app .form {
+  position: relative;
+}
+
+.app .row {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+}
+.app .row .number-input {
+  width: 300px;
+  display: flex;
+}
+
+.app .row .number-input .icon-btn {
+  padding: 4px 10px;
+  margin: 0 10px;
+}
+
+.app .row .number-input .input {
+  min-width: 100px;
+  height: 32px;
+  padding-left: 10px;
+}
+
+.app .btns {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+}
+.app .btns .btn {
+  height: 100%;
+  padding: 0 14px;
+  margin-left: 10px;
+}
+
+.app .table {
+  --xy_ratio: 1;
+  margin-top: 10px;
+  width: 600px;
+  height: 0;
+  padding-top: calc(100% * var(--xy_ratio));
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.app .table .grid-container {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: grid;
+  width: 100%;
+  height: 100%;
+}
+
+.app .table .grid-container .grid {
+  position: relative;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.grid.start::after,
+.grid.end::after,
+.grid.obstacle::after {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  content: "";
+}
+
+.grid.start::after {
+  background-image: url(../assets/02.webp);
+}
+
+.grid.end::after {
+  background-image: url(../assets/03.webp);
+}
+
+.grid.obstacle::after {
+  background-image: url(../assets/01.webp);
+}
+
+.grid.yellow {
+  background: yellow;
+}
