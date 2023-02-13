@@ -118,6 +118,9 @@ window.onload = () => {
     function updateTranslate(num) {
       slider.style.transform = `translateX(${num}px)`;
     }
+
+    const changeDot = addDots();
+    changeDot(index);
     //判定当前index
     function checkIndex() {
       slider.classList.remove("shifting");
@@ -130,8 +133,33 @@ window.onload = () => {
         updateTranslate(initTransX);
         index = 0;
       }
+      changeDot(index);
       allowShift = true;
     }
+
+    function addDots() {
+      const dotsOuter = document.createElement("div");
+      dotsOuter.classList.add("dots-outer");
+      const tempNodes = [];
+      for (let i = 0; i < items.length; i++) {
+        const dot = document.createElement("span");
+        dot.classList.add("dot");
+        dot.dataset.i = i;
+        dotsOuter.appendChild(dot);
+        tempNodes.push(dot);
+      }
+      swiperWrapper.appendChild(dotsOuter);
+      return (index) => {
+        tempNodes.forEach((n, i) => {
+          if (i == index) {
+            n.classList.add("action");
+          } else if (n.classList.value.includes("action")) {
+            n.classList.remove("action");
+          }
+        });
+      };
+    }
+
     console.log("初始化结束");
     console.groupEnd();
   }
