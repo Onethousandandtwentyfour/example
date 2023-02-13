@@ -103,3 +103,28 @@ body {
     var(--side-color)
   );
 }
+
+.swiper-outer .dots-outer {
+  padding: 20px;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate3d(-50%, 0, 0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.swiper-outer .dots-outer .dot {
+  --dot-action-color: orange;
+  margin: 0 10px;
+  padding: 5px;
+  background-color: var(--dot-action-color);
+  border-radius: 50%;
+  transition: all 0.2s linear;
+  cursor: pointer;
+}
+
+.swiper-outer .dots-outer .dot.action {
+  --dot-action-color: green;
+  box-shadow: 0 0 15px 5px var(--dot-action-color);
+}
