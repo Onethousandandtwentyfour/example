@@ -12,8 +12,10 @@
 ### threejs-demo
 1.[demo](https://onethousandandtwentyfour.github.io/example/three-example/index.html)
 
-### 其他
-[vue template test](https://onethousandandtwentyfour.github.io/example/dist/index.html)
+### 随笔
+1.[无限滚动](https://onethousandandtwentyfour.github.io/example/无限滚动/index.html)
+
+2.[简易swiper](https://onethousandandtwentyfour.github.io/example/简易swiper/index.html)
 
 
 
