@@ -9,6 +9,9 @@
 
 3.[迷宫寻路](https://onethousandandtwentyfour.github.io/example/bfs_test/)
 
+### threejs-demo
+1.[demo](https://onethousandandtwentyfour.github.io/example/three-example/index.html)
+
 ### 其他
 [vue template test](https://onethousandandtwentyfour.github.io/example/dist/index.html)
 
