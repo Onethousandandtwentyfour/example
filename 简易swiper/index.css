@@ -1,0 +1,105 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100vh;
+}
+
+.body {
+  background-color: white;
+}
+
+.box {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-outer {
+  --sw: 100vw;
+  --sh: 100vh;
+  --side-color: rgba(220, 200, 200, 0.6);
+  width: var(--sw);
+  height: var(--sh);
+  overflow: hidden;
+}
+
+.swiper-outer .swiper-inner {
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.swiper-outer .swiper-item {
+  flex-shrink: 0;
+  width: var(--sw);
+  height: var(--sh);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-outer .swiper-inner.shifting {
+  transition: transform 0.2s ease-out;
+}
+
+.swiper-item h2 {
+  color: white;
+}
+
+.swiper-item.s1 {
+  background: linear-gradient(
+    90deg,
+    var(--side-color),
+    10%,
+    rgba(255, 0, 0, 0.2),
+    90%,
+    var(--side-color)
+  );
+}
+.swiper-item.s2 {
+  background: linear-gradient(
+    90deg,
+    var(--side-color),
+    10%,
+    rgba(0, 255, 0, 0.2),
+    90%,
+    var(--side-color)
+  );
+}
+.swiper-item.s3 {
+  background: linear-gradient(
+    90deg,
+    var(--side-color),
+    10%,
+    rgba(0, 0, 255, 0.2),
+    90%,
+    var(--side-color)
+  );
+}
+.swiper-item.s4 {
+  background: linear-gradient(
+    90deg,
+    var(--side-color),
+    10%,
+    rgba(250, 20, 147, 0.2),
+    90%,
+    var(--side-color)
+  );
+}
+.swiper-item.s5 {
+  background: linear-gradient(
+    90deg,
+    var(--side-color),
+    10%,
+    rgba(0, 191, 255, 0.2) 90%,
+    var(--side-color)
+  );
+}
