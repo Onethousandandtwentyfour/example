@@ -64,8 +64,8 @@ window.onload = () => {
       }
 
       if (e.type == "touchmove") {
-        posX2 = posX1 - e.touched[0].clientX;
-        posX1 = e.touched[0].clientX;
+        posX2 = posX1 - e.touches[0].clientX;
+        posX1 = e.touches[0].clientX;
       } else {
         posX2 = posX1 - e.clientX;
         posX1 = e.clientX;
