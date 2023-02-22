@@ -17,6 +17,8 @@
 
 2.[简易swiper](https://onethousandandtwentyfour.github.io/example/简易swiper/index.html)
 
+3.[js放大镜](https://onethousandandtwentyfour.github.io/example/js放大镜/index.html)
+
 
 
 
