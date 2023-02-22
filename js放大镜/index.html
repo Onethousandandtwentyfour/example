@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>js放大镜</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+      }
+
+      .scale-box {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        line-height: 0;
+      }
+
+      .scale-box .img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .scale-box .lens {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        border: 2px solid gainsboro;
+        position: absolute;
+        overflow: hidden;
+      }
+
+      .scale-box .lens-center {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .scale-box .lens:active {
+        cursor: move;
+      }
+
+      .input-box:focus-within::after {
+        content: "回车以替换背景图片,空值自动重置";
+        color: white;
+        position: fixed;
+        line-height: 32px;
+        font-size: 14px;
+        top: 0;
+        left: 50%;
+        z-index: 1;
+        transform: translate3d(-25vw, 0, 0);
+      }
+
+      #input {
+        width: 10vw;
+        height: 32px;
+        line-height: 30px;
+        background-color: white;
+        z-index: 1;
+        position: fixed;
+        top: 32px;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        opacity: 0.6;
+        outline: none;
+        border: none;
+        border-radius: 4px;
+        padding: 0 1vw;
+        border: 1px solid transparent;
+        transition: width 0.3s;
+      }
+      #input:hover {
+        width: 50vw;
+        border-color: skyblue;
+      }
+      #input:focus {
+        width: 50vw;
+        opacity: 1;
+        border-color: skyblue;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="input-box">
+      <input id="input" placeholder="图片链接" />
+    </div>
+    <div class="scale-box">
+      <img
+        src="https://w.wallhaven.cc/full/dp/wallhaven-dp2w5j.jpg"
+        class="img"
+        alt
+      />
+    </div>
+    <script>
+      function main() {
+        const img = document.querySelector(".img");
+        //基本常量
+        const zoom = 3;
+        //鼠标位置相关
+        const startPoint = { x: 0, y: 0 },
+          currentPoint = { x: 0, y: 0 };
+        //创建放大镜相关元素
+        let { lens, scaleImg } = getLensAboutElem();
+        lens.onmousedown = mouseDown;
+
+        function getLensAboutElem() {
+          let scaleImg = document.querySelector(".lens-img"),
+            lens;
+          if (!scaleImg) {
+            lens = document.createElement("div");
+            scaleImg = document.createElement("img");
+            scaleImg.classList.add("lens-img");
+            scaleImg.src = img.src;
+            scaleImg.style.width = `${img.width * zoom}px`;
+            scaleImg.style.height = `${img.height * zoom}px`;
+            scaleImg.style.objectFit = "cover";
+
+            lens.append(scaleImg);
+            lens.classList.add("lens");
+            lens.classList.add("lens-center");
+            img.parentElement.insertBefore(lens, img);
+          } else {
+            lens = scaleImg.parentElement;
+          }
+          return { lens, scaleImg };
+        }
+        function mouseDown(e) {
+          e = e || window.event;
+          e.preventDefault();
+
+          startPoint.x = e.clientX;
+          startPoint.y = e.clientY;
+
+          lens.onmousemove = mouseOver;
+          lens.onmouseup = mouseUp;
+        }
+        function mouseOver(e) {
+          e = e || window.event;
+          e.preventDefault();
+
+          currentPoint.x -= startPoint.x - e.clientX;
+          startPoint.x = e.clientX;
+          currentPoint.y -= startPoint.y - e.clientY;
+          startPoint.y = e.clientY;
+
+          lens.style.transform = `translate3d(${currentPoint.x}px,${currentPoint.y}px,0)`;
+          scaleImg.style.transform = `translate3d(${-currentPoint.x * zoom}px,${
+            -currentPoint.y * zoom
+          }px,0)`;
+        }
+        function mouseUp(e) {
+          e = e || window.event;
+          e.preventDefault();
+          lens.onmousemove = null;
+          lens.onmouseup = null;
+        }
+
+        return {
+          reset: () => {
+            img.src = "https://w.wallhaven.cc/full/dp/wallhaven-dp2w5j.jpg";
+            scaleImg.src = img.src;
+          },
+          update: (url) => {
+            const newImg = new Image();
+            newImg.onload = () => {
+              img.src = url;
+              scaleImg.src = img.src;
+            };
+            newImg.onerror = (reason) => {
+              console.log("错误原因", reason);
+              alert(`${url}  加载失败`);
+            };
+            newImg.src = url.trim();
+          },
+        };
+      }
+      window.onload = () => {
+        const ref = main();
+        document.querySelector("#input").addEventListener("keydown", (e) => {
+          e = e || window.event;
+          if (e.keyCode == 13) {
+            if (e.target.value) {
+              ref.update(e.target.value);
+            } else {
+              ref.reset();
+            }
+          }
+        });
+      };
+    </script>
+  </body>
+</html>
