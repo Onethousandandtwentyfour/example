@@ -146,12 +146,11 @@
         function mouseDown(e) {
           e = e || window.event;
           e.preventDefault();
-
           startPoint.x = e.clientX;
           startPoint.y = e.clientY;
-
           lens.onmousemove = mouseOver;
           lens.onmouseup = mouseUp;
+          lens.onmouseleave = mouseUp;
         }
         function mouseOver(e) {
           e = e || window.event;
@@ -172,18 +171,25 @@
           e.preventDefault();
           lens.onmousemove = null;
           lens.onmouseup = null;
+          lens.onmouseout = null;
+          lens.onmouseleave = null;
         }
 
         return {
-          reset: () => {
-            img.src = "https://w.wallhaven.cc/full/dp/wallhaven-dp2w5j.jpg";
+          reset: (
+            url = "https://w.wallhaven.cc/full/dp/wallhaven-dp2w5j.jpg"
+          ) => {
+            img.src = url;
             scaleImg.src = img.src;
+            startPoint.x = 0;
+            startPoint.y = 0;
+            currentPoint.x = 0;
+            currentPoint.y = 0;
           },
           update: (url) => {
             const newImg = new Image();
             newImg.onload = () => {
-              img.src = url;
-              scaleImg.src = img.src;
+              this.reset(url);
             };
             newImg.onerror = (reason) => {
               console.log("错误原因", reason);
