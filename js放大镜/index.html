@@ -176,9 +176,7 @@
         }
 
         return {
-          reset: (
-            url = "https://w.wallhaven.cc/full/dp/wallhaven-dp2w5j.jpg"
-          ) => {
+          reset(url = "https://w.wallhaven.cc/full/dp/wallhaven-dp2w5j.jpg") {
             img.src = url;
             scaleImg.src = img.src;
             startPoint.x = 0;
@@ -186,7 +184,7 @@
             currentPoint.x = 0;
             currentPoint.y = 0;
           },
-          update: (url) => {
+          update(url) {
             const newImg = new Image();
             newImg.onload = () => {
               this.reset(url);
