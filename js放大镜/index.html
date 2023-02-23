@@ -41,6 +41,16 @@
         overflow: hidden;
       }
 
+      /* 锚点 */
+      /* .scale-box .lens::after {
+        content: "";
+        width: 10px;
+        height: 10px;
+        background-color: deeppink;
+        position: absolute;
+        border-radius: 50%;
+      } */
+
       .scale-box .lens-center {
         position: absolute;
         left: 0;
@@ -160,6 +170,22 @@
           startPoint.x = e.clientX;
           currentPoint.y -= startPoint.y - e.clientY;
           startPoint.y = e.clientY;
+          //最左
+          if (currentPoint.x < -0.5 * window.innerWidth) {
+            currentPoint.x = -0.5 * window.innerWidth;
+          }
+          //最右
+          else if (currentPoint.x > 0.5 * window.innerWidth) {
+            currentPoint.x = 0.5 * window.innerWidth;
+          }
+          //最上
+          if (currentPoint.y < -0.5 * window.innerHeight) {
+            currentPoint.y = -0.5 * window.innerHeight;
+          }
+          //最下
+          else if (currentPoint.y > 0.5 * window.innerHeight) {
+            currentPoint.y = 0.5 * window.innerHeight;
+          }
 
           lens.style.transform = `translate3d(${currentPoint.x}px,${currentPoint.y}px,0)`;
           scaleImg.style.transform = `translate3d(${-currentPoint.x * zoom}px,${
