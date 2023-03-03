@@ -7,17 +7,18 @@
 
 2.[时钟动画](https://onethousandandtwentyfour.github.io/example/canvas/%e6%97%b6%e9%92%9f%e5%8a%a8%e7%94%bb/)
 
-3.[迷宫寻路](https://onethousandandtwentyfour.github.io/example/bfs_test/)
 
 ### threejs-demo
 1.[demo](https://onethousandandtwentyfour.github.io/example/three-example/index.html)
 
 ### 随笔
-1.[无限滚动](https://onethousandandtwentyfour.github.io/example/无限滚动/index.html)
+1.[迷宫寻路](https://onethousandandtwentyfour.github.io/example/bfs_test/)
 
-2.[简易swiper](https://onethousandandtwentyfour.github.io/example/简易swiper/index.html)
+2.[无限滚动](https://onethousandandtwentyfour.github.io/example/无限滚动/index.html)
 
-3.[js放大镜](https://onethousandandtwentyfour.github.io/example/js放大镜/index.html)
+3.[简易swiper](https://onethousandandtwentyfour.github.io/example/简易swiper/index.html)
+
+4.[js放大镜](https://onethousandandtwentyfour.github.io/example/js放大镜/index.html)
 
 
 
