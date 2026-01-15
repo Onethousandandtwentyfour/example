@@ -1,0 +1,19 @@
+{
+  "miniprogramRoot": "./",
+  "compileType": "game",
+  "setting": {
+    "es6": true,
+    "minified": true,
+    "enhance": true,
+    "showShadowRootInWxmlPanel": true,
+    "packNpmRelationList": [],
+    "babelSetting": {
+      "ignore": [],
+      "disablePlugins": [],
+      "outputPath": ""
+    }
+  },
+  "appid": "your-app-id",
+  "projectname": "jump-game",
+  "description": "微信跳一跳小游戏"
+}
